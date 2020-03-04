@@ -5,7 +5,8 @@ import {
   TableRow,
   TableBody,
   TableCell,
-  TextInput
+  TextInput,
+  Button
 } from "grommet";
 import Fuse from "fuse.js";
 import styled from "styled-components";
@@ -14,18 +15,18 @@ export const Subscribe = () => {
   const [list, setList] = useState([
     {
       id: 1,
-      title: "The Great Gatsby",
-      author: "F. Scott Fitzgerald"
+      projectId: "RNH",
+      projectName: "Realtor New Homes"
     },
     {
       id: 2,
-      title: "The DaVinci Code",
-      author: "Dan Brown"
+      projectId: "VW",
+      projectName: "Verizon Wireless"
     },
     {
       id: 3,
-      title: "Angels & Demons",
-      author: "Dan Brown"
+      projectId: "MCP",
+      projectName: "Mastercard Cashless Payments"
     }
   ]);
 
@@ -34,19 +35,13 @@ export const Subscribe = () => {
   const options = {
     shouldSort: true,
     threshold: 0.2,
-    location: 0,
-    distance: 50,
     maxPatternLength: 32,
     minMatchCharLength: 1,
-    keys: ["title", "author"]
+    keys: ["projectId", "projectName"]
   };
   let fuse = new Fuse(list, options);
 
   const data = query ? fuse.search(query) : list;
-
-  // searchHandler = event => {
-  //   setList(fuse.search(event.target.value));
-  // };
 
   return (
     <div>
@@ -54,30 +49,39 @@ export const Subscribe = () => {
         placeholder="search"
         onChange={event => setQuery(event.target.value)}
       />
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableCell scope="col" border="bottom">
-              Title
-            </TableCell>
-            <TableCell scope="col" border="bottom">
-              Author
-            </TableCell>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {data.map((item, index) => {
-            return (
-              <TableRow>
-                <TableCell scope="row">
-                  <strong>{item.title}</strong>
-                </TableCell>
-                <TableCell>{item.author}</TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
+      <center>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableCell scope="col" border="bottom">
+                Project ID
+              </TableCell>
+              <TableCell scope="col" border="bottom">
+                Project Name
+              </TableCell>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {data.map((item, index) => {
+              return (
+                <TableRow>
+                  <TableCell scope="row">
+                    <strong>{item.projectId}</strong>
+                  </TableCell>
+                  <TableCell>{item.projectName}</TableCell>
+                  <TableCell>
+                    <Button
+                      label="Subscribe"
+                      color="#55CCCC"
+                      onClick={() => {}}
+                    />
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </center>
     </div>
   );
 };
