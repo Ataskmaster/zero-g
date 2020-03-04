@@ -64,7 +64,7 @@ export const Subscribe = () => {
           <TableBody>
             {data.map((item, index) => {
               return (
-                <TableRow>
+                <TableRow key={item.id}>
                   <TableCell scope="row">
                     <strong>{item.projectId}</strong>
                   </TableCell>
