@@ -765,7 +765,7 @@ const theme = {
     header: {
       align: "start",
       pad: {
-        horizontal: "small",
+        horizontal: "large",
         vertical: "xsmall"
       },
       border: "bottom",
@@ -775,14 +775,14 @@ const theme = {
     body: {
       align: "start",
       pad: {
-        horizontal: "small",
+        horizontal: "large",
         vertical: "xsmall"
       }
     },
     footer: {
       align: "start",
       pad: {
-        horizontal: "small",
+        horizontal: "large",
         vertical: "xsmall"
       },
       border: "top",
