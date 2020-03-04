@@ -6,13 +6,22 @@ import {
   TableBody,
   TableCell,
   TextInput,
-  Button
+  Button,
+  Box
 } from "grommet";
 import Fuse from "fuse.js";
 import styled from "styled-components";
 
+const StyledBox = styled.div`
+  display: "flex";
+  justify-content: "center";
+  height: "100vh";
+  width: "70vw";
+  background-color: "#333";
+`;
+
 export const Subscribe = () => {
-  const [list, setList] = useState([
+  const [list] = useState([
     {
       id: 1,
       projectId: "RNH",
@@ -30,6 +39,10 @@ export const Subscribe = () => {
     }
   ]);
 
+  const [user, setUser] = useState([2, 3]);
+
+  let dupUser = [...user];
+
   const [query, setQuery] = useState("");
 
   const options = {
@@ -44,9 +57,9 @@ export const Subscribe = () => {
   const data = query ? fuse.search(query) : list;
 
   return (
-    <div>
+    <StyledBox>
       <TextInput
-        placeholder="search"
+        placeholder="start typing your project name"
         onChange={event => setQuery(event.target.value)}
       />
       <center>
@@ -62,7 +75,7 @@ export const Subscribe = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data.map((item, index) => {
+            {data.map((item, _index) => {
               return (
                 <TableRow key={item.id}>
                   <TableCell scope="row">
@@ -71,9 +84,24 @@ export const Subscribe = () => {
                   <TableCell>{item.projectName}</TableCell>
                   <TableCell>
                     <Button
-                      label="Subscribe"
+                      label={
+                        dupUser.indexOf(item.id) === -1
+                          ? "Subscribe"
+                          : "Unsubscribe"
+                      }
+                      value={item.id}
                       color="#55CCCC"
-                      onClick={() => {}}
+                      onClick={
+                        dupUser.indexOf(item.id) === -1
+                          ? () => {
+                              dupUser.push(item.id);
+                              setUser(dupUser);
+                            }
+                          : () => {
+                              dupUser.splice(dupUser.indexOf(item.id), 1);
+                              setUser(dupUser);
+                            }
+                      }
                     />
                   </TableCell>
                 </TableRow>
@@ -82,6 +110,6 @@ export const Subscribe = () => {
           </TableBody>
         </Table>
       </center>
-    </div>
+    </StyledBox>
   );
 };
