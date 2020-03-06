@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import FlexView from "react-flexview";
 import {
   Grommet,
   Table,
@@ -8,10 +7,11 @@ import {
   TableBody,
   TableCell,
   TextInput,
-  Button
+  Button,
+  Box
 } from "grommet";
 import Fuse from "fuse.js";
-import styled from "styled-components";
+// import styled from "styled-components";
 import theme from "../../utils/theme";
 
 export const Subscribe = () => {
@@ -52,62 +52,58 @@ export const Subscribe = () => {
 
   return (
     <Grommet theme={theme}>
-      <FlexView column hAlignContent="center">
-        <FlexView children width="50%">
-          <TextInput
-            placeholder="start typing your project name"
-            onChange={event => setQuery(event.target.value)}
-          />
-        </FlexView>
-        <FlexView children>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableCell scope="col" border="bottom">
-                  Project ID
-                </TableCell>
-                <TableCell scope="col" border="bottom">
-                  Project Name
-                </TableCell>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {data.map((item, _index) => {
-                return (
-                  <TableRow key={item.id}>
-                    <TableCell scope="row">
-                      <strong>{item.projectId}</strong>
-                    </TableCell>
-                    <TableCell>{item.projectName}</TableCell>
-                    <TableCell>
-                      <Button
-                        label={
-                          dupUser.indexOf(item.id) === -1
-                            ? "Subscribe"
-                            : "Unsubscribe"
-                        }
-                        value={item.id}
-                        color="#55CCCC"
-                        onClick={
-                          dupUser.indexOf(item.id) === -1
-                            ? () => {
-                                dupUser.push(item.id);
-                                setUser(dupUser);
-                              }
-                            : () => {
-                                dupUser.splice(dupUser.indexOf(item.id), 1);
-                                setUser(dupUser);
-                              }
-                        }
-                      />
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </FlexView>
-      </FlexView>
+      <Box justify="center" align="center" alignContent="center">
+        <TextInput
+          placeholder="start typing your project name"
+          onChange={event => setQuery(event.target.value)}
+        />
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableCell scope="col" border="bottom">
+                Project ID
+              </TableCell>
+              <TableCell scope="col" border="bottom">
+                Project Name
+              </TableCell>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {data.map((item, _index) => {
+              return (
+                <TableRow key={item.id}>
+                  <TableCell scope="row">
+                    <strong>{item.projectId}</strong>
+                  </TableCell>
+                  <TableCell>{item.projectName}</TableCell>
+                  <TableCell>
+                    <Button
+                      label={
+                        dupUser.indexOf(item.id) === -1
+                          ? "Subscribe"
+                          : "Unsubscribe"
+                      }
+                      value={item.id}
+                      color="#55CCCC"
+                      onClick={
+                        dupUser.indexOf(item.id) === -1
+                          ? () => {
+                              dupUser.push(item.id);
+                              setUser(dupUser);
+                            }
+                          : () => {
+                              dupUser.splice(dupUser.indexOf(item.id), 1);
+                              setUser(dupUser);
+                            }
+                      }
+                    />
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </Box>
     </Grommet>
   );
 };
