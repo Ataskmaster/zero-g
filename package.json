@@ -84,7 +84,6 @@
     "babel-plugin-macros": "^2.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
-    "fuse.js": "^3.4.6",
     "husky": "^4.2.3",
     "lint-staged": "^10.0.7",
     "stylelint": "^13.2.0",
