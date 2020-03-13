@@ -12,7 +12,7 @@ import {
 } from "grommet";
 import theme from "../../utils/theme";
 
-export const Subscribe = () => {
+export const Subscription = () => {
   const [projects, setProjects] = useState([]);
 
   const [subscriptions, setSubscriptions] = useState([]);
@@ -21,23 +21,23 @@ export const Subscribe = () => {
     setProjects([
       {
         id: 1,
-        projectId: "RNH",
-        projectName: "Realtor New Homes"
+        key: "RNH",
+        name: "Realtor New Homes"
       },
       {
         id: 2,
-        projectId: "VW",
-        projectName: "Verizon Wireless"
+        key: "VW",
+        name: "Verizon Wireless"
       },
       {
         id: 3,
-        projectId: "MCP",
-        projectName: "Mastercard Cashless Payments"
+        key: "MCP",
+        name: "Mastercard Cashless Payments"
       },
       {
         id: 4,
-        projectId: "ZG",
-        projectName: "Zero-G"
+        key: "ZG",
+        name: "Zero-G"
       }
     ]);
     setSubscriptions([1, 3]);
@@ -50,10 +50,8 @@ export const Subscribe = () => {
   let search = query.trim().toLowerCase();
   if (search.length > 0) {
     search = search.replace(/[-[\]{}()*+?.,\\^$|#\\s]/g, "\\$&");
-    data = data.filter(function(item) {
-      return (item.projectId + " " + item.projectName)
-        .toLowerCase()
-        .match(search);
+    data = data.filter(item => {
+      return (item.key + " " + item.name).toLowerCase().match(search);
     });
   }
 
@@ -85,9 +83,9 @@ export const Subscribe = () => {
                 return (
                   <TableRow key={item.id}>
                     <TableCell scope="row">
-                      <strong>{item.projectId}</strong>
+                      <strong>{item.key}</strong>
                     </TableCell>
-                    <TableCell>{item.projectName}</TableCell>
+                    <TableCell>{item.name}</TableCell>
                     <TableCell>
                       <Button
                         label={
